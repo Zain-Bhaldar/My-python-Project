@@ -14,9 +14,12 @@ Enter second number: 20
 
 Result: 30
 '''
-a = int(input("Enter first number: "))
-b = int(input("Enter second number: "))
-
+try:
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
+except ValueError:
+    print("Invalid input. Please enter valid numbers.")
+    
 def addition():
     result = a + b
     print(f"Result: {result}")
@@ -59,5 +62,5 @@ def main_menu():
             break
         else:
             print("Invalid choice. Please try again.")
-            
+
 main_menu()
