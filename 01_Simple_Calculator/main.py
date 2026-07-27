@@ -37,25 +37,27 @@ def division():
         print("Error: Division by zero is not allowed.")
 
 def main_menu():
-    print("====== Calculator ======")
-    print("1. Addition")
-    print("2. Subtraction")
-    print("3. Multiplication")
-    print("4. Division")
-    print("5. Exit")
-    choice = input("Choose (1-5): ")
+    while True:
+        print("\n====== Calculator ======")
+        print("1. Addition")
+        print("2. Subtraction")
+        print("3. Multiplication")
+        print("4. Division")
+        print("5. Exit")
+        choice = input("Choose (1-5): ")
 
-    if choice == "1":
-        addition()
-    elif choice == "2":
-        subtraction()
-    elif choice == "3":
-        multiplication()
-    elif choice == "4":
-        division()
-    elif choice == "5":
-        print("Exiting the calculator. Goodbye!")
-    else:
-        print("Invalid choice. Please try again.")
-
+        if choice == "1":
+            addition()
+        elif choice == "2":
+            subtraction()
+        elif choice == "3":
+            multiplication()
+        elif choice == "4":
+            division()
+        elif choice == "5":
+            print("Exiting the calculator. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+            
 main_menu()
