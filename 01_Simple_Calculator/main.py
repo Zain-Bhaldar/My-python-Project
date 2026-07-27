@@ -57,3 +57,5 @@ def main_menu():
         print("Exiting the calculator. Goodbye!")
     else:
         print("Invalid choice. Please try again.")
+
+main_menu()
