@@ -13,47 +13,47 @@ Enter first number: 10
 Enter second number: 20
 
 Result: 30
-
-
-====== Calculator ======
-
-1. Addition
-2. Subtraction
-3. Multiplication
-4. Division
-5. Exit
-
-Choose:
 '''
-print("====== Calculator ======\n")
-options = {"1": "Addition", "2": "Subtraction", "3": "Multiplication", "4": "Division", "5": "Exit"}
+a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
 
-for key, value in options.items():
-    print(f"{key}. {value}")
+def addition():
+    result = a + b
+    print(f"Result: {result}")
 
-choice = input("Choose: ")
-if choice in options:
-    if choice == "5":
+def subtraction():
+    result = a - b
+    print(f"Result: {result}")
+
+def multiplication():
+    result = a * b
+    print(f"Result: {result}")
+
+def division():
+    if b != 0:
+        result = a / b
+        print(f"Result: {result}")
+    else:
+        print("Error: Division by zero is not allowed.")
+
+def main_menu():
+    print("====== Calculator ======")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Exit")
+    choice = input("Choose (1-5): ")
+
+    if choice == "1":
+        addition()
+    elif choice == "2":
+        subtraction()
+    elif choice == "3":
+        multiplication()
+    elif choice == "4":
+        division()
+    elif choice == "5":
         print("Exiting the calculator. Goodbye!")
     else:
-        num1 = float(input("Enter first number: "))
-        num2 = float(input("Enter second number: "))
-        
-        if choice == "1":
-            result = num1 + num2
-            operation = "Addition"
-        elif choice == "2":
-            result = num1 - num2
-            operation = "Subtraction"
-        elif choice == "3":
-            result = num1 * num2
-            operation = "Multiplication"
-        elif choice == "4":
-            if num2 != 0:
-                result = num1 / num2
-                operation = "Division"
-            else:
-                print("Error: Division by zero is not allowed.")
-                exit()
-        
-        print(f"\nResult of {operation}: {result}")
+        print("Invalid choice. Please try again.")
