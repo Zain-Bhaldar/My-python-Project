@@ -15,7 +15,7 @@ def add_contact():
     print(f"Contact {name} added successfully!")
 
 def view_contacts():
-    if not contacts:
+    if not contact:
         print("No contacts found.")
         return
     print("Contacts List:")
