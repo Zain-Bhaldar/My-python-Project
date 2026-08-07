@@ -11,23 +11,26 @@
 8. Exit
 '''
 students = []
+def calculate_grades(average):
+    if average >= 90:
+        return'A+'
+    elif average >= 80:
+        return'A'
+    elif average >= 70:
+        return 'B'
+    else:
+        return 'C'
+    
 def add_student_info():
     roll_no = int(input("Enter the Roll Number: "))
     name = input("Enter the name of the student: ")
     maths = int(input("Enter Maths Marks: "))
-    physics = int(input("Enter Maths Marks: "))
-    chemistry = int(input("Enter Maths Marks: "))
+    physics = int(input("Enter Physics Marks: "))
+    chemistry = int(input("Enter Chemistry Marks: "))
 
     total = maths+physics+chemistry
     average = total/3
-    if average >= 90:
-        grade = 'A+'
-    elif average >= 80:
-        grade = 'A'
-    elif average >= 70:
-        grade = 'B'
-    else:
-        grade = 'C'
+    grade = calculate_grades(average)
     student = {
         "roll_no": roll_no,
         "name": name,
@@ -41,64 +44,94 @@ def add_student_info():
     students.append(student)
     print(f"Student {name} added succesfully")
 
+def display_student(index, student):
+    print(
+        f"{index}. "
+        f"Roll No: {student['roll_no']}, "
+        f"Name: {student['name']}, "
+        f"Maths: {student['maths']}, "
+        f"Physics: {student['physics']}, "
+        f"Chemistry: {student['chemistry']}, "
+        f"Total: {student['total']}, "
+        f"Average: {student['average']:.2f}, "
+        f"Grade: {student['grade']}"
+    )
+
 def view_all_student():
     if not students:
         print("Student not found.")
         return
     print("Student list")
-    for index, student in enumerate(students):
-        print(f"{index +1}. Roll Number: {student['roll_no']}, Name: {student['name']}, Maths Marks:{student['maths']}, Physics marks{student['physics']},Chemistry marks: {student['chemistry']}, Total marks: {student['total']}, Average marks: {student['average']}, Grade: {student['grade']} ")
+    for index, student in enumerate(students, 1):
+        display_student(index, student)
 
 def search_student():
     search_student_name = input("Enter The Name you want to search:").lower()
-    found_student = [student for student in found_student if search_student_name in student['name'].lower()]
+    found_student = [student for student in student if search_student_name in student['name'].lower()]
     if found_student:
         print("Found student")
-        for index, student in enumerate(students):
-            print(f"{index +1}. Roll Number: {student['roll_no']}, Name: {student['name']}, Maths Marks:{student['maths']}, Physics marks{student['physics']},Chemistry marks: {student['chemistry']}, Total marks: {student['total']}, Average marks: {student['average']}, Grade: {student['grade']} ")
+        for index, student in enumerate(found_student,1):
+            display_student(index, student)
     else:
         print("No student found")
 
 def update_marks():
-    search_student_name = input("Enter The Name you want to search:").lower
+    search_student_name = input("Enter The Name you want to search:").lower()
     found_student = [student for student in students if search_student_name in student['name'].lower()]
     if found_student:
         print("Found student")
-        for index, student in enumerate(students):
-            print(f"{index +1}. Roll Number: {student['roll_no']}, Name: {student['name']}, Maths Marks:{student['maths']}, Physics marks{student['physics']},Chemistry marks: {student['chemistry']}, Total marks: {student['total']}, Average marks: {student['average']}, Grade: {student['grade']} ")
-            choice = input("Enter the stdent name you want to edit")
-            if choice.lower() and 1 <= int(choice) <= len(found_student):
-                index = int(choice) -1
+        for index, student in enumerate(found_student, 1):
+            display_student(index, student)
+            try:
+                choice = int(input("Enter the student name you want to edit"))
+            except ValueError:
+                print(("Please enter a valid number."))
+            if 1 <= choice <=len(found_student):
+                index = choice - 1
                 student = found_student[index]
-                print(f"Updating student info: {student['name']}")
-                maths = int(input("Enter new marks(Press enter to keep current marks: )")) or student['maths']
-                physics = int(input("Enter new marks(Press enter to keep current marks: )")) or student['physics']
-                chemistry = int(input("Enter new marks(Press enter to keep current marks: )")) or student['chemistry']
-                total = maths+physics+chemistry
-                average = total/3
-                if average >= 90:
-                    grade = 'A+'
-                elif average >= 80:
-                    grade = 'A'
-                elif average >= 70:
-                    grade = 'B'
+                print(f"Updating student info: {student['name']}") 
+                new_maths = input("Enter new marks(Press enter to keep current marks: )")
+                if new_maths == "":
+                    maths = student['maths']
                 else:
-                    grade = 'C'
-                print(f"Stuent info of {student['name']}")
+                    maths = int(new_maths)
+                new_physics = input("Enter new marks(Press enter to keep current marks: )")
+                if new_physics == "":
+                    physics = student['physics']
+                else:
+                    maths = int(new_physics)
+                new_chemistry = input("Enter new marks(Press enter to keep current marks: )")
+                if new_chemistry == "":
+                    chemistry = student['chemistry']
+                else:
+                    maths = int(new_chemistry)
+                total = maths+ physics+chemistry
+                average = total/3
+                grade = calculate_grades(average)
+                student['maths'] = new_maths
+                student['physics'] = new_physics
+                student['chemistry'] = new_chemistry
+                student['total'] = total
+                student['average'] = average
+                student['grade'] = grade
+                print(f"{student['name']}'s marks updated successfully.")
             else:
                 print("Invalid choice.")
     else:
         print("Student Info not Found")
 
 def delete_student_info():
-    search_student_name = input("Enter The Name you want to search:").lower
+    search_student_name = input("Enter The Name you want to search:").lower()
     found_student = [student for student in students if search_student_name in student['name'].lower()]
     if found_student:
         print("Found student")
         for index, student in enumerate(students):
-            print(f"{index +1}. Roll Number: {student['roll_no']}, Name: {student['name']}, Maths Marks:{student['maths']}, Physics marks{student['physics']},Chemistry marks: {student['chemistry']}, Total marks: {student['total']}, Average marks: {student['average']}, Grade: {student['grade']} ")
-            choice = input("Enter the stdent name you want to edit")
-            if choice.lower() and 1 <= int(choice) <= len(found_student):
+            display_student(index, student)
+            try:
+                choice = int(input("Enter the student name you want to edit"))
+            except ValueError:
+                print(("Please enter a valid number.")) 
+            if 1 <= int(choice) <= len(found_student):
                 index = int(choice) -1
                 student = found_student[index]
                 students.remove(student)
@@ -108,7 +141,9 @@ def delete_student_info():
     else:
         print("Student info not found.")
 
+# def show_topper():
 
+# def class_average():
 
 def menu():     
     while True:
