@@ -66,7 +66,7 @@ def view_all_student():
         display_student(index, student)
 
 def search_student():
-    search_student_name = input("Enter The Name you want to search:").lower()
+    search_student_name = input("Enter The Name you want to search: ").lower()
     found_student = [
         student for student in students
         if search_student_name in student['name'].lower()
@@ -81,7 +81,7 @@ def update_marks():
         for index, student in enumerate(found_student, 1):
             display_student(index, student)
             try:
-                choice = int(input("Enter the student name you want to edit"))
+                choice = int(input("Enter the student number you want to edit: "))
             except ValueError:
                 print(("Please enter a valid number."))
                 return
@@ -89,17 +89,17 @@ def update_marks():
                 index = choice - 1
                 student = found_student[index]
                 print(f"Updating student info: {student['name']}") 
-                new_maths = input("Enter new marks(Press enter to keep current marks: )")
+                new_maths = input("Enter new Maths marks(Press enter to keep current marks: )")
                 if new_maths == "":
                     maths = student['maths']
                 else:
                     maths = int(new_maths)
-                new_physics = input("Enter new marks(Press enter to keep current marks: )")
+                new_physics = input("Enter new Physics marks(Press enter to keep current marks: )")
                 if new_physics == "":
                     physics = student['physics']
                 else:
                     physics = int(new_physics)
-                new_chemistry = input("Enter new marks(Press enter to keep current marks: )")
+                new_chemistry = input("Enter new Chemistry marks(Press enter to keep current marks: )")
                 if new_chemistry == "":
                     chemistry = student['chemistry']
                 else:
@@ -126,7 +126,7 @@ def delete_student_info():
         for index, student in enumerate(found_student, 1):
             display_student(index, student)
             try:
-                choice = int(input("Enter the student number you want to edit"))
+                choice = int(input("Enter the student number you want to edit: "))
             except ValueError:
                 print(("Please enter a valid number.")) 
                 return
