@@ -67,17 +67,15 @@ def view_all_student():
 
 def search_student():
     search_student_name = input("Enter The Name you want to search:").lower()
-    found_student = [student for student in student if search_student_name in student['name'].lower()]
-    if found_student:
-        print("Found student")
-        for index, student in enumerate(found_student,1):
-            display_student(index, student)
-    else:
-        print("No student found")
+    found_student = [
+        student for student in students
+        if search_student_name in student['name'].lower()
+    ]
+    return found_student
+
 
 def update_marks():
-    search_student_name = input("Enter The Name you want to search:").lower()
-    found_student = [student for student in students if search_student_name in student['name'].lower()]
+    found_student = search_student()
     if found_student:
         print("Found student")
         for index, student in enumerate(found_student, 1):
@@ -86,6 +84,7 @@ def update_marks():
                 choice = int(input("Enter the student name you want to edit"))
             except ValueError:
                 print(("Please enter a valid number."))
+                return
             if 1 <= choice <=len(found_student):
                 index = choice - 1
                 student = found_student[index]
@@ -99,18 +98,18 @@ def update_marks():
                 if new_physics == "":
                     physics = student['physics']
                 else:
-                    maths = int(new_physics)
+                    physics = int(new_physics)
                 new_chemistry = input("Enter new marks(Press enter to keep current marks: )")
                 if new_chemistry == "":
                     chemistry = student['chemistry']
                 else:
-                    maths = int(new_chemistry)
+                    chemistry = int(new_chemistry)
                 total = maths+ physics+chemistry
                 average = total/3
                 grade = calculate_grades(average)
-                student['maths'] = new_maths
-                student['physics'] = new_physics
-                student['chemistry'] = new_chemistry
+                student['maths'] = maths
+                student['physics'] = physics
+                student['chemistry'] = chemistry
                 student['total'] = total
                 student['average'] = average
                 student['grade'] = grade
@@ -121,18 +120,18 @@ def update_marks():
         print("Student Info not Found")
 
 def delete_student_info():
-    search_student_name = input("Enter The Name you want to search:").lower()
-    found_student = [student for student in students if search_student_name in student['name'].lower()]
+    found_student = search_student()
     if found_student:
         print("Found student")
-        for index, student in enumerate(students):
+        for index, student in enumerate(found_student, 1):
             display_student(index, student)
             try:
-                choice = int(input("Enter the student name you want to edit"))
+                choice = int(input("Enter the student number you want to edit"))
             except ValueError:
                 print(("Please enter a valid number.")) 
-            if 1 <= int(choice) <= len(found_student):
-                index = int(choice) -1
+                return
+            if 1 <= choice <= len(found_student):
+                index = choice -1
                 student = found_student[index]
                 students.remove(student)
                 print(f"Student Info of {student['name']}deleted Succesfully")
@@ -141,9 +140,30 @@ def delete_student_info():
     else:
         print("Student info not found.")
 
-# def show_topper():
 
-# def class_average():
+
+def show_topper():
+    if not students:
+        print("Student not found.")
+        return
+    topper = students[0]
+    for student in students:
+        if student['average'] > topper['average']:
+            topper = student
+
+    print("\nTopper:")
+    display_student(1, topper)
+
+def show_class_average():
+    if not students:
+            print("Student not found.")
+            return
+    total = 0
+    for student in students:
+        total += student['average']
+
+    class_average = total/len(students)
+    print(f"Class average is {class_average:.2f}")
 
 def menu():     
     while True:
@@ -163,15 +183,21 @@ def menu():
         elif choice == '2':
             view_all_student()
         elif choice == '3':
-            search_student()
+            found_student = search_student()
+            if found_student:
+                print("Found student")
+                for index, student in enumerate(found_student, 1):
+                    display_student(index, student)
+            else:
+                print("No student found")
         elif choice == '4':
             update_marks()
         elif choice == '5':
             delete_student_info()
         elif choice == '6':
-            pass
+            show_topper()
         elif choice == '7':
-            pass
+            show_class_average()
         elif choice == '8':
             print("Thank You!")
             return
