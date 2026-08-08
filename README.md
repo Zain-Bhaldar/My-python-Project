@@ -80,11 +80,11 @@ A menu-driven quiz game with multiple categories.
 
 #### Categories
 
-* 🌌 Space Quiz
-* 🌍 General Knowledge
-* 🗺️ Geography
-* 🏛️ History
-* 💻 Programming
+* Space Quiz
+* General Knowledge
+* Geography
+* History
+* Programming
 
 #### Features
 
@@ -92,6 +92,40 @@ A menu-driven quiz game with multiple categories.
 * Instant feedback after each answer
 * Score tracking
 * Category selection
+* Menu-driven interface
+
+---
+
+### 7. Contact Book
+
+A command-line application for managing contact information.
+
+#### Features
+
+* Add contacts
+* View contacts
+* Search contacts
+* Store names, phone numbers, and email addresses
+* Menu-driven interface
+
+---
+
+### 8. Student Management System
+
+A command-line application for managing student information and academic records.
+
+#### Features
+
+* Add students
+* View all students
+* Search students
+* Update marks
+* Delete students
+* Calculate total marks
+* Calculate average marks
+* Assign grades
+* Show class topper
+* Show class average
 * Menu-driven interface
 
 ---
@@ -114,4 +148,4 @@ I plan to continue adding more Python projects as I learn advanced concepts such
 
 ---
 
-Thank you for visiting my repository! ⭐ If you find these projects helpful, feel free to explore them and share your feedback.
+Thank you for visiting my repository! If you find these projects helpful, feel free to explore them and share your feedback.
